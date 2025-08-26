@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>calculator</title>
+  </head>
+  <body>
+      <div style="max-width: 300px; margin: 40px auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px #aaa; background: #f9f9f9;">
+        <input type="text" id="display" style="width: 100%; font-size: 1.5em; margin-bottom: 10px; text-align: right; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" disabled />
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+          <button onclick="press('7')">7</button>
+          <button onclick="press('8')">8</button>
+          <button onclick="press('9')">9</button>
+          <button onclick="press('/')">/</button>
+          <button onclick="press('4')">4</button>
+          <button onclick="press('5')">5</button>
+          <button onclick="press('6')">6</button>
+          <button onclick="press('*')">x</button>
+          <button onclick="press('1')">1</button>
+          <button onclick="press('2')">2</button>
+          <button onclick="press('3')">3</button>
+          <button onclick="press('-')">-</button>
+          <button onclick="press('0')">0</button>
+          <button onclick="press('.')">.</button>
+          <button onclick="calculate()">=</button>
+          <button onclick="press('+')">+</button>
+          <button onclick="clearDisplay()" style="grid-column: span 4; background: #e57373; color: white;">C</button>
+        </div>
+      </div>
+      <script>
+        let display = document.getElementById('display');
+        let current = '';
+        function press(val) {
+          if (val === '*' && current.slice(-1) === '*') return;
+          current += val;
+          display.value = current.replace(/\*/g, 'x');
+        }
+        function calculate() {
+          try {
+            let result = eval(current);
+            display.value = result;
+            current = result.toString();
+          } catch {
+            display.value = 'Error';
+            current = '';
+          }
+        }
+        function clearDisplay() {
+          current = '';
+          display.value = '';
+        }
+      </script>
+    </body>
+    
+  </body>
+</html>
